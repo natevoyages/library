@@ -65,6 +65,7 @@ function Book(title, author, pages, read)
  
     let bookCard = document.createElement("div");
     bookCard.style.display = "flex";
+    bookCard.style.backgroundColor = "#2DA675"
     bookCard.style.flexDirection = "column";
     bookCard.style.margin = "10%";
     bookCard.style.padding = "5%";
@@ -82,12 +83,20 @@ function Book(title, author, pages, read)
     closeBtn.style.background = "rgba(255, 255, 255, 0)";
 
 
+    let editBtn = document.createElement("button");
+    editBtn.className = "edit-Read"
+    editBtn.setAttribute("read", book.readResult);
+    editBtn.textContent = "Change Read Status";
+    editBtn.style.alignSelf = "flex-end"
+
+
     let title = document.createElement("p");
     let author = document.createElement("p");
  
     let pages = document.createElement("p");
  
     let read = document.createElement("p");
+    read.className = "read-status";
  
     title.textContent = "Title: " + book.title;
     author.textContent = "Author: " + book.author;
@@ -99,13 +108,17 @@ function Book(title, author, pages, read)
     bookCard.appendChild(author);
     bookCard.appendChild(pages);
     bookCard.appendChild(read);
+    bookCard.appendChild(editBtn);
+
     libraryDisplay.appendChild(bookCard);
     book.index = myLibrary.length - 1;
+    editBtn.setAttribute("index", book.index);
     closeBtn.value = book.index;
     bookCards.push(bookCard);
 
 
     closeBtn.addEventListener('click', removeBook)
+    editBtn.addEventListener('click', changeReadStat);
     exitForm();
 
     function removeBook(e){
@@ -113,8 +126,36 @@ function Book(title, author, pages, read)
     let bookSelected = bookCards.at(e.target.value);
     bookSelected.remove();
     myLibrary.splice(e.target.value, 1);
+    bookCards.splice(e.target.value, 1);
+    for(let i = 0; i< bookCards.length; i++){
+      if (myLibrary.at(i).index != i)
+      {
+        myLibrary.at(i).index = i;
+        console.log(myLibrary.at(i).index);
+        bookCards.at(i).querySelector(".close-card").value = i;
+      } 
+  
+
     console.log(myLibrary);
+    console.log(bookCards);
     }
+
+  }
+  
+  function changeReadStat(e){
+    let index = e.target.getAttribute("index");
+    if(e.target.getAttribute("read") == "no"){
+      e.target.setAttribute("read", "yes");
+    }
+    else{
+    e.target.setAttribute("read", "no");
+    }
+    let newRead = e.target.getAttribute("read");
+    myLibrary.at(index).read = newRead;
+    bookCards.at(index).querySelector(".read-status").textContent = "Read: " + newRead;
+
+  }
+
   }
 
 
