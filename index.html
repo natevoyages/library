@@ -9,13 +9,46 @@
   <script src="./javascript.js" defer></script>
 </head>
 <body>
+
   <div class="header">
     hehe this is a library shhh
+    <button class="add">Add Book</button>
 
   </div>
 
   <div class="main">
 
+  </div>
+  <div class="popup-module">
+    <div class="form-module">
+      <button class="btn-close">+</button>
+      <form action="post">
+        <ul class="form-content">
+          <li>
+            <legend class="form-title">Book Info</legend>
+          </li>
+          <li>
+            <label for="title">Title</label>
+            <input class="title-input" type="text" id="title" name="title">
+          </li>
+          <li>
+            <label for="author">Author</label>
+            <input class="author-input" type="text" id="author" name="author">
+          </li>
+          <li>     
+            <label for="pages">Pages</label>
+            <input class="pages-input" type="number" id="pages" name="pages">
+          </li>
+          <li>
+            <label for="read">Read</label>
+            <input type="checkbox" value="yes" id="read" name="read">
+          </li>
+          <li>
+            <button class="btn-submit">Submit</button>
+          </li>
+        </ul>
+      </form>
+    </div>
   </div>
 
   <div class="footer">
